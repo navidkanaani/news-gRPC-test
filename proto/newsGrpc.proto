@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+service newsGrpc {
+    rpc Search (NewsHeadline) returns (ListOfNews) {};
+}
+
+service KafkaBroker {
+    rpc Consumer (Topic) returns (stream NewsHeadline) {};
+}
+
+message Topic {
+    string topic_name = 1;
+}
+
+message NewsHeadline {
+    string headline = 1;
+}
+
+message News {
+    string headline = 1;
+    string category= 2;
+    string date = 3;
+    string authors = 4;
+    string short_description = 5;
+    string link = 6;
+}
+
+message ListOfNews {
+    repeated News News = 1;
+}
